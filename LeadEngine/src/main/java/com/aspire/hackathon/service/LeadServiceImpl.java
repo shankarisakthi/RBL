@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aspire.hackathon.bean.Lead;
+import com.aspire.hackathon.constants.LeadConstants;
 import com.aspire.hackathon.dao.LeadDao;
 
-@Service("leadService")
+@Service(LeadConstants.LEAD_SERVICE)
 public class LeadServiceImpl implements ILeadService {
 
 	@Autowired
