@@ -28,8 +28,8 @@ public class LeadAssets {
 	 * @return the id
 	 */
 	@Id
-	@Column(name="id",unique=true,nullable=false)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Integer getId() {
 		return id;
 	}

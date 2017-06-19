@@ -11,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 /**
  * 
  * @author shankari.sakthivel
@@ -20,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Lead")
 public class Lead {
-	
+
 	private String id;
 	private String leadId;
 	private String name;
@@ -34,24 +36,26 @@ public class Lead {
 	private String empType;
 	private Integer savingsPercentage;
 	private Set<LeadAssets> assets;
-	private Set<LeadPurchaseTypes> purchaseTypes; 
+	private Set<LeadPurchaseTypes> purchaseTypes;
 	private Set<LeadHobbies> hobbies;
-	
-	
+	private Stall stallId;
+
 	public Lead(String name, long mobileNumber, String emailId) {
 		super();
 		this.name = name;
 		this.mobileNumber = mobileNumber;
 		this.emailId = emailId;
 	}
+
 	/**
 	 * 
 	 * @return
 	 */
-	@Column(name="cust_name")
+	@Column(name = "cust_name")
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * 
 	 * @param name
@@ -59,14 +63,16 @@ public class Lead {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * 
 	 * @return
 	 */
-	@Column(name="mobile_no")
+	@Column(name = "mobile_no")
 	public long getMobileNumber() {
 		return mobileNumber;
 	}
+
 	/**
 	 * 
 	 * @param mobileNumber
@@ -74,16 +80,16 @@ public class Lead {
 	public void setMobileNumber(long mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	@Column(name="mail_id")
+	@Column(name = "mail_id")
 	public String getEmailId() {
 		return emailId;
 	}
-	
+
 	/**
 	 * 
 	 * @param emailId
@@ -91,18 +97,18 @@ public class Lead {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	
+
 	/**
 	 * 
 	 * @return
 	 */
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Id
-	@Column(name="id",unique=true,nullable=false)
+	@Column(name = "id", unique = true, nullable = false)
 	public String getId() {
 		return id;
 	}
-	
+
 	/**
 	 * 
 	 * @param id
@@ -110,17 +116,18 @@ public class Lead {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * @return the leadId
 	 */
-	@Column(name="lead_id",unique=true,nullable=false)
+	@Column(name = "lead_id", unique = true, nullable = false)
 	public String getLeadId() {
 		return leadId;
 	}
 
 	/**
-	 * @param leadId the leadId to set
+	 * @param leadId
+	 *            the leadId to set
 	 */
 	public void setLeadId(String leadId) {
 		this.leadId = leadId;
@@ -129,13 +136,14 @@ public class Lead {
 	/**
 	 * @return the dob
 	 */
-	@Column(name="dob")
+	@Column(name = "dob")
 	public Date getDob() {
 		return dob;
 	}
 
 	/**
-	 * @param dob the dob to set
+	 * @param dob
+	 *            the dob to set
 	 */
 	public void setDob(Date dob) {
 		this.dob = dob;
@@ -144,13 +152,14 @@ public class Lead {
 	/**
 	 * @return the gender
 	 */
-	@Column(name="gender")
+	@Column(name = "gender")
 	public String getGender() {
 		return gender;
 	}
 
 	/**
-	 * @param gender the gender to set
+	 * @param gender
+	 *            the gender to set
 	 */
 	public void setGender(String gender) {
 		this.gender = gender;
@@ -159,13 +168,14 @@ public class Lead {
 	/**
 	 * @return the isMarried
 	 */
-	@Column(name="isMarried")
+	@Column(name = "isMarried")
 	public Boolean getIsMarried() {
 		return isMarried;
 	}
 
 	/**
-	 * @param isMarried the isMarried to set
+	 * @param isMarried
+	 *            the isMarried to set
 	 */
 	public void setIsMarried(Boolean isMarried) {
 		this.isMarried = isMarried;
@@ -174,13 +184,14 @@ public class Lead {
 	/**
 	 * @return the familyIncome
 	 */
-	@Column(name="familyIncome")
+	@Column(name = "familyIncome")
 	public Integer getFamilyIncome() {
 		return familyIncome;
 	}
 
 	/**
-	 * @param familyIncome the familyIncome to set
+	 * @param familyIncome
+	 *            the familyIncome to set
 	 */
 	public void setFamilyIncome(Integer familyIncome) {
 		this.familyIncome = familyIncome;
@@ -189,13 +200,14 @@ public class Lead {
 	/**
 	 * @return the noOfEarnings
 	 */
-	@Column(name="noOfEarnings")
+	@Column(name = "noOfEarnings")
 	public Integer getNoOfEarnings() {
 		return noOfEarnings;
 	}
 
 	/**
-	 * @param noOfEarnings the noOfEarnings to set
+	 * @param noOfEarnings
+	 *            the noOfEarnings to set
 	 */
 	public void setNoOfEarnings(Integer noOfEarnings) {
 		this.noOfEarnings = noOfEarnings;
@@ -204,13 +216,14 @@ public class Lead {
 	/**
 	 * @return the empType
 	 */
-	@Column(name="empType")
+	@Column(name = "empType")
 	public String getEmpType() {
 		return empType;
 	}
 
 	/**
-	 * @param empType the empType to set
+	 * @param empType
+	 *            the empType to set
 	 */
 	public void setEmpType(String empType) {
 		this.empType = empType;
@@ -219,13 +232,14 @@ public class Lead {
 	/**
 	 * @return the savingsPercentage
 	 */
-	@Column(name="savingsPercent")
+	@Column(name = "savingsPercent")
 	public Integer getSavingsPercentage() {
 		return savingsPercentage;
 	}
 
 	/**
-	 * @param savingsPercentage the savingsPercentage to set
+	 * @param savingsPercentage
+	 *            the savingsPercentage to set
 	 */
 	public void setSavingsPercentage(Integer savingsPercentage) {
 		this.savingsPercentage = savingsPercentage;
@@ -241,7 +255,8 @@ public class Lead {
 	}
 
 	/**
-	 * @param assets the assets to set
+	 * @param assets
+	 *            the assets to set
 	 */
 	public void setAssets(Set<LeadAssets> assets) {
 		this.assets = assets;
@@ -257,7 +272,8 @@ public class Lead {
 	}
 
 	/**
-	 * @param purchaseTypes the purchaseTypes to set
+	 * @param purchaseTypes
+	 *            the purchaseTypes to set
 	 */
 	public void setPurchaseTypes(Set<LeadPurchaseTypes> purchaseTypes) {
 		this.purchaseTypes = purchaseTypes;
@@ -273,17 +289,36 @@ public class Lead {
 	}
 
 	/**
-	 * @param hobbies the hobbies to set
+	 * @param hobbies
+	 *            the hobbies to set
 	 */
 	public void setHobbies(Set<LeadHobbies> hobbies) {
 		this.hobbies = hobbies;
 	}
 
 	@Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        str.append("Id:- " + getId() + ", Name:- " + getName() + ", MobileNumber:- " + getMobileNumber());
-        return str.toString();
-    }
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Id:- " + getId() + ", Name:- " + getName()
+				+ ", MobileNumber:- " + getMobileNumber());
+		return str.toString();
+	}
+
+	/**
+	 * @return the stallId
+	 */
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id")
+	public Stall getStallId() {
+		return stallId;
+	}
+
+	/**
+	 * @param stallId
+	 *            the stallId to set
+	 */
+	public void setStallId(Stall stallId) {
+		this.stallId = stallId;
+	}
 
 }
