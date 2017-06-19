@@ -36,6 +36,7 @@ public class User {
 	/**
 	 * @return the userNmae
 	 */
+	@Column(name="user_name")
 	public String getUserNmae() {
 		return userNmae;
 	}
@@ -48,6 +49,7 @@ public class User {
 	/**
 	 * @return the password
 	 */
+	@Column(name="password")
 	public String getPassword() {
 		return password;
 	}
@@ -60,6 +62,7 @@ public class User {
 	/**
 	 * @return the status
 	 */
+	@Column(name="status")
 	public boolean isStatus() {
 		return status;
 	}
