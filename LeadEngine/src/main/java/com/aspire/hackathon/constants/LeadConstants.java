@@ -10,4 +10,5 @@ package com.aspire.hackathon.constants;
 public class LeadConstants {
 
 	public static final String LEAD_SERVICE = "leadService";
+	public static final String EMP_SERVICE  ="empService";
 }

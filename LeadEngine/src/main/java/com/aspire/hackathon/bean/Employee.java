@@ -3,23 +3,37 @@
  */
 package com.aspire.hackathon.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 
 /**
  * @author shankari.sakthivel
  *
  */
+@Entity
+@Table(name="emp_employee")
 public class Employee {
 
-	private Integer id;
+	private Long id;
 	private String empName;
 	private String empCode;
 	private Role roles;
 	private String managerId;
+	private Integer mobileNum;
+	private String emailId;
 
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	@Column(name="emp_id",unique=true,nullable=false)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	public Long getId() {
 		return id;
 	}
 
@@ -27,13 +41,14 @@ public class Employee {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the empName
 	 */
+	@Column(name="emp_name",nullable=false)
 	public String getEmpName() {
 		return empName;
 	}
@@ -49,6 +64,7 @@ public class Employee {
 	/**
 	 * @return the empCode
 	 */
+	@Column(name="emp_code",nullable=false)
 	public String getEmpCode() {
 		return empCode;
 	}
@@ -64,6 +80,8 @@ public class Employee {
 	/**
 	 * @return the roles
 	 */
+	@OneToOne
+	@JoinColumn(name="role_id")
 	public Role getRoles() {
 		return roles;
 	}
@@ -79,6 +97,7 @@ public class Employee {
 	/**
 	 * @return the managerId
 	 */
+	@Column(name="manager_id")
 	public String getManagerId() {
 		return managerId;
 	}
@@ -89,6 +108,36 @@ public class Employee {
 	 */
 	public void setManagerId(String managerId) {
 		this.managerId = managerId;
+	}
+
+	/**
+	 * @return the mobileNum
+	 */
+	@Column(name="mobile_no")
+	public Integer getMobileNum() {
+		return mobileNum;
+	}
+
+	/**
+	 * @param mobileNum the mobileNum to set
+	 */
+	public void setMobileNum(Integer mobileNum) {
+		this.mobileNum = mobileNum;
+	}
+
+	/**
+	 * @return the emailId
+	 */
+	@Column(name="email_id")
+	public String getEmailId() {
+		return emailId;
+	}
+
+	/**
+	 * @param emailId the emailId to set
+	 */
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
 }

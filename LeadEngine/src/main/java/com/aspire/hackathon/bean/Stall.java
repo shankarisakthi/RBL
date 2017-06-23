@@ -8,9 +8,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,7 +21,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "stall_details")
+@Table(name = "stl_stall_details")
 public class Stall {
 
 	private Integer id;
@@ -30,7 +32,7 @@ public class Stall {
 	/**
 	 * @return the id
 	 */
-	@Column(name="id",unique=true,nullable=false)
+	@Column(name="stl_id",unique=true,nullable=false)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Integer getId() {
 		return id;
@@ -47,7 +49,7 @@ public class Stall {
 	/**
 	 * @return the dateofStall
 	 */
-	@Column(name="stall_date",nullable=false)
+	@Column(name="stl_date",nullable=false)
 	public Date getDateofStall() {
 		return dateofStall;
 	}
@@ -63,7 +65,7 @@ public class Stall {
 	/**
 	 * @return the place
 	 */
-	@Column(name="venue",nullable=false)
+	@Column(name="stl_place",nullable=false)
 	public String getPlace() {
 		return place;
 	}
@@ -79,8 +81,9 @@ public class Stall {
 	/**
 	 * @return the stallOwner
 	 */
-	@OneToMany
-	@JoinColumn(name="id")
+	@OneToMany(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)
+	@JoinTable(name="so_stall_owners",joinColumns=@JoinColumn(name="so_stl_id", referencedColumnName="stl_id"),
+		      inverseJoinColumns=@JoinColumn(name="so_emp_id", referencedColumnName="emp_id"))
 	public List<Employee> getStallOwner() {
 		return stallOwners;
 	}
