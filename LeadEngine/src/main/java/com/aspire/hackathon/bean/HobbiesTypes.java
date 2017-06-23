@@ -15,17 +15,17 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "asset_type")
-public class AssetType {
+@Table(name = "hty_hobby_type")
+public class HobbiesTypes {
 
 	private Integer id;
-	private String assetType;
+	private String hobbiesType;
 
 	/**
 	 * @return the id
 	 */
 	@Id
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "hty_type_id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Integer getId() {
 		return id;
@@ -40,18 +40,18 @@ public class AssetType {
 	}
 
 	/**
-	 * @return the assetType
+	 * @return the hobbiesType
 	 */
-	@Column(name = "asset_type")
-	public String getAssetType() {
-		return assetType;
+	@Column(name = "hty_type_name")
+	public String getHobbiesType() {
+		return hobbiesType;
 	}
 
 	/**
-	 * @param assetType
-	 *            the assetType to set
+	 * @param hobbiesType
+	 *            the hobbiesType to set
 	 */
-	public void setAssetType(String assetType) {
-		this.assetType = assetType;
+	public void setHobbiesType(String hobbiesType) {
+		this.hobbiesType = hobbiesType;
 	}
 }

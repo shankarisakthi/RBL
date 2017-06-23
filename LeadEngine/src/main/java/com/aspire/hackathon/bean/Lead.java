@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,10 +21,10 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "Lead")
+@Table(name = "ldt_lead_details")
 public class Lead {
 
-	private String id;
+	private Long id;
 	private String leadId;
 	private String name;
 	private long mobileNumber;
@@ -35,23 +36,17 @@ public class Lead {
 	private Integer noOfEarnings;
 	private String empType;
 	private Integer savingsPercentage;
-	private Set<LeadAssets> assets;
-	private Set<LeadPurchaseTypes> purchaseTypes;
-	private Set<LeadHobbies> hobbies;
-	private Stall stallId;
-
-	public Lead(String name, long mobileNumber, String emailId) {
-		super();
-		this.name = name;
-		this.mobileNumber = mobileNumber;
-		this.emailId = emailId;
-	}
+	private Set<AssetTypes> assets;
+	private Set<PurchaseTypes> purchaseTypes;
+	private Set<HobbiesTypes> hobbies;
+	private Stall stall;
+	private Employee emp;
 
 	/**
 	 * 
 	 * @return
 	 */
-	@Column(name = "cust_name")
+	@Column(name = "ldt_lead_name")
 	public String getName() {
 		return name;
 	}
@@ -68,7 +63,7 @@ public class Lead {
 	 * 
 	 * @return
 	 */
-	@Column(name = "mobile_no")
+	@Column(name = "ldt_mobile_number")
 	public long getMobileNumber() {
 		return mobileNumber;
 	}
@@ -85,7 +80,7 @@ public class Lead {
 	 * 
 	 * @return
 	 */
-	@Column(name = "mail_id")
+	@Column(name = "ldt_email_id")
 	public String getEmailId() {
 		return emailId;
 	}
@@ -104,8 +99,8 @@ public class Lead {
 	 */
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Id
-	@Column(name = "id", unique = true, nullable = false)
-	public String getId() {
+	@Column(name = "ldt_id", unique = true, nullable = false)
+	public Long getId() {
 		return id;
 	}
 
@@ -113,14 +108,14 @@ public class Lead {
 	 * 
 	 * @param id
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the leadId
 	 */
-	@Column(name = "lead_id", unique = true, nullable = false)
+	@Column(name = "ldt_lead_id", unique = true, nullable = false)
 	public String getLeadId() {
 		return leadId;
 	}
@@ -136,7 +131,7 @@ public class Lead {
 	/**
 	 * @return the dob
 	 */
-	@Column(name = "dob")
+	@Column(name = "ldt_date_of_birth")
 	public Date getDob() {
 		return dob;
 	}
@@ -152,7 +147,7 @@ public class Lead {
 	/**
 	 * @return the gender
 	 */
-	@Column(name = "gender")
+	@Column(name = "ldt_gender")
 	public String getGender() {
 		return gender;
 	}
@@ -168,7 +163,7 @@ public class Lead {
 	/**
 	 * @return the isMarried
 	 */
-	@Column(name = "isMarried")
+	@Column(name = "ldt_maritial_status")
 	public Boolean getIsMarried() {
 		return isMarried;
 	}
@@ -184,7 +179,7 @@ public class Lead {
 	/**
 	 * @return the familyIncome
 	 */
-	@Column(name = "familyIncome")
+	@Column(name = "ldt_family_income")
 	public Integer getFamilyIncome() {
 		return familyIncome;
 	}
@@ -200,7 +195,7 @@ public class Lead {
 	/**
 	 * @return the noOfEarnings
 	 */
-	@Column(name = "noOfEarnings")
+	@Column(name = "ldt_no_of_earnings")
 	public Integer getNoOfEarnings() {
 		return noOfEarnings;
 	}
@@ -216,7 +211,7 @@ public class Lead {
 	/**
 	 * @return the empType
 	 */
-	@Column(name = "empType")
+	@Column(name = "ldt_employment_type")
 	public String getEmpType() {
 		return empType;
 	}
@@ -232,7 +227,7 @@ public class Lead {
 	/**
 	 * @return the savingsPercentage
 	 */
-	@Column(name = "savingsPercent")
+	@Column(name = "ldt_savings_percentage")
 	public Integer getSavingsPercentage() {
 		return savingsPercentage;
 	}
@@ -249,8 +244,9 @@ public class Lead {
 	 * @return the assets
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "lead_id")
-	public Set<LeadAssets> getAssets() {
+	@JoinTable(name="lat_lead_assets",joinColumns=@JoinColumn(name="lat_lead_id", referencedColumnName="ldt_id"),
+		      inverseJoinColumns=@JoinColumn(name="lat_asset_id", referencedColumnName="ast_type_id"))
+	public Set<AssetTypes> getAssets() {
 		return assets;
 	}
 
@@ -258,7 +254,7 @@ public class Lead {
 	 * @param assets
 	 *            the assets to set
 	 */
-	public void setAssets(Set<LeadAssets> assets) {
+	public void setAssets(Set<AssetTypes> assets) {
 		this.assets = assets;
 	}
 
@@ -266,8 +262,9 @@ public class Lead {
 	 * @return the purchaseTypes
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "lead_id")
-	public Set<LeadPurchaseTypes> getPurchaseTypes() {
+	@JoinTable(name="lpt_lead_purchase_type",joinColumns=@JoinColumn(name="lpt_lead_id", referencedColumnName="ldt_id"),
+		      inverseJoinColumns=@JoinColumn(name="lpt_purchase_type_id", referencedColumnName="pct_id"))
+	public Set<PurchaseTypes> getPurchaseTypes() {
 		return purchaseTypes;
 	}
 
@@ -275,7 +272,7 @@ public class Lead {
 	 * @param purchaseTypes
 	 *            the purchaseTypes to set
 	 */
-	public void setPurchaseTypes(Set<LeadPurchaseTypes> purchaseTypes) {
+	public void setPurchaseTypes(Set<PurchaseTypes> purchaseTypes) {
 		this.purchaseTypes = purchaseTypes;
 	}
 
@@ -283,8 +280,9 @@ public class Lead {
 	 * @return the hobbies
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade = javax.persistence.CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "lead_id")
-	public Set<LeadHobbies> getHobbies() {
+	@JoinTable(name="lht_lead_hobbies",joinColumns=@JoinColumn(name="lht_lead_id", referencedColumnName="ldt_id"),
+		      inverseJoinColumns=@JoinColumn(name="lht_hobby_id", referencedColumnName="hty_type_id"))
+	public Set<HobbiesTypes> getHobbies() {
 		return hobbies;
 	}
 
@@ -292,25 +290,17 @@ public class Lead {
 	 * @param hobbies
 	 *            the hobbies to set
 	 */
-	public void setHobbies(Set<LeadHobbies> hobbies) {
+	public void setHobbies(Set<HobbiesTypes> hobbies) {
 		this.hobbies = hobbies;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder str = new StringBuilder();
-		str.append("Id:- " + getId() + ", Name:- " + getName()
-				+ ", MobileNumber:- " + getMobileNumber());
-		return str.toString();
 	}
 
 	/**
 	 * @return the stallId
 	 */
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "stl_id")
 	public Stall getStallId() {
-		return stallId;
+		return stall;
 	}
 
 	/**
@@ -318,7 +308,23 @@ public class Lead {
 	 *            the stallId to set
 	 */
 	public void setStallId(Stall stallId) {
-		this.stallId = stallId;
+		this.stall = stallId;
+	}
+
+	/**
+	 * @return the emp
+	 */
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "emp_id")
+	public Employee getEmp() {
+		return emp;
+	}
+
+	/**
+	 * @param emp the emp to set
+	 */
+	public void setEmp(Employee emp) {
+		this.emp = emp;
 	}
 
 }

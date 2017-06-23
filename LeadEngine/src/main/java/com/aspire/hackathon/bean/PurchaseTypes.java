@@ -15,17 +15,16 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "hobbies_type")
-public class HobbiesType {
-
+@Table(name = "pct_purchase_type")
+public class PurchaseTypes {
 	private Integer id;
-	private String hobbiesType;
+	private String purchaseType;
 
 	/**
 	 * @return the id
 	 */
 	@Id
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "pct_id", unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public Integer getId() {
 		return id;
@@ -40,18 +39,18 @@ public class HobbiesType {
 	}
 
 	/**
-	 * @return the hobbiesType
+	 * @return the purchaseType
 	 */
-	@Column(name = "hobbies_type")
-	public String getHobbiesType() {
-		return hobbiesType;
+	@Column(name = "pct_name")
+	public String getPurchaseType() {
+		return purchaseType;
 	}
 
 	/**
-	 * @param hobbiesType
-	 *            the hobbiesType to set
+	 * @param purchaseType
+	 *            the purchaseType to set
 	 */
-	public void setHobbiesType(String hobbiesType) {
-		this.hobbiesType = hobbiesType;
+	public void setPurchaseType(String purchaseType) {
+		this.purchaseType = purchaseType;
 	}
 }

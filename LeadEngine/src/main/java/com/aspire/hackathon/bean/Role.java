@@ -4,14 +4,18 @@
 package com.aspire.hackathon.bean;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author shankari.sakthivel
  *
  */
+ @Entity
+ @Table(name="rol_role")
 public class Role {
 
 	private Integer id;
@@ -21,7 +25,7 @@ public class Role {
 	 * @return the id
 	 */
 	@Id
-	@Column(name="id",unique=true,nullable=false)
+	@Column(name="role_id",unique=true,nullable=false)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	public Integer getId() {
 		return id;
