@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+	<!-- <script src="D://projects/rbl_hack/canvas_js_1.9.9/canvasjs.min.js"></script> -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			var chart = new CanvasJS.Chart("chartContainer", {
+				theme: "theme2",//theme1
+				title:{
+					text: "Basic Column Chart - CanvasJS"              
+				},
+				animationEnabled: true,   // change to true
+				data: [              
+				{
+					// Change type to "bar", "area", "spline", "pie",etc.
+					type: "column",
+					dataPoints: [
+						{ label: "apple",  y: 10  },
+						{ label: "orange", y: 15  },
+						{ label: "banana", y: 25  },
+						{ label: "mango",  y: 30  },
+						{ label: "grape",  y: 28  }
+					]
+				}
+				]
+			});
+			chart.render();
+		}
+	</script>
+
+    <style>
+
+    	/*div.container {
+		    width: 98%;
+		    border: 1px solid gray;
+		}*/
+
+		.canvasjs-chart-credit {
+		   display: none;
+		}
+
+		body {
+		  position: relative;
+		  margin: 0;
+		  padding-bottom: 6rem;
+		  min-height: 100%;
+		}
+
+    	header {
+		    padding: 1em;
+		    color: white;
+		    background-color: black;
+		    clear: left;
+		    text-align: center;
+		}
+
+		footer {
+		    padding: 1em;
+		    color: white;
+		    bottom: 0;
+		    right: 0;
+		    left: 0;
+		    background-color: black;
+		    clear: left;
+		    text-align: center;
+		}		
+
+		nav {
+		    float: left;
+		    max-width: 160px;
+		    margin: 0;
+		    padding: 1em;
+		}
+
+		nav ul {
+		    list-style-type: none;
+		    padding: 0;
+		}
+		   
+		nav ul a {
+		    text-decoration: none;
+		}
+
+		section, article {
+		    margin-left: 170px;
+		    border-left: 1px solid gray;
+		    padding: 1em;
+		    overflow: hidden;
+		}
+    </style>
+</head>
+<body>
+	<div class="container"> 
+		<header>
+			<h1> Leads Tracking System </h1>
+		</header>
+
+		<nav>
+			<div id="userContainer" style="width: 100%; height: 100px;"> Manager details
+
+			</div>
+			<ul>
+				<li><a href="#">Menu 1</a></li>
+				<li><a href="#">Menu 2</a></li>
+			</ul>
+		</nav>
+
+		<section>
+			<table class="ui sortable celled table">
+			  <thead>
+			    <tr>
+			      <th class="">Name</th>
+			      <th class="sorted descending">Lead Count</th>
+			      <th class="">Mobile No</th>
+			      <th class="">Email ID</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+				      <td>Jamie</td>
+				      <td >5</td>
+				      <td >9731134078</td>
+				      <td >veera.manimuthu@google.com</td>
+				  </tr>
+				  <tr>
+				      <td>Jill</td>
+				      <td >4</td>
+				      <td >9566953836</td>
+				      <td >veera.muthu@aspiresys.com</td>
+				  </tr>
+				  <tr>
+				  	  <td>Ragnar</td>
+				      <td >10</td>
+				      <td >9845621556</td>
+				      <td >manimuthu.pandian@linkedin.com</td>
+				  </tr>
+			  </tbody>		  
+			</table>
+		</section>
+
+
+		<!-- <section>
+			<table class="ui sortable celled table">
+			  <thead>
+			    <tr>
+			      <th class="">Name</th>
+			      <th class="sorted descending">Lead Count</th>
+			      <th class="">Mobile No</th>
+			      <th class="">Email ID</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+				      <td>Jamie</td>
+				      <td >5</td>
+				      <td >9731134078</td>
+				      <td >veera.manimuthu@google.com</td>
+				  </tr>
+				  <tr>
+				      <td>Jill</td>
+				      <td >4</td>
+				      <td >9566953836</td>
+				      <td >veera.muthu@aspiresys.com</td>
+				  </tr>
+				  <tr>
+				  	  <td>Ragnar</td>
+				      <td >10</td>
+				      <td >9845621556</td>
+				      <td >manimuthu.pandian@linkedin.com</td>
+				  </tr>
+			  </tbody>		  
+			</table>
+		</section> -->
+
+		<section>
+			<div id="chartContainer" style="height: 300px; width: 100%;"></div>	
+		</section>
+		
+
+
+		<!-- <article>
+			<table class="ui sortable celled table">
+			  <thead>
+			    <tr>
+			      <th class="">Name</th>
+			      <th class="sorted descending">Lead Count</th>
+			      <th class="">Mobile No</th>
+			      <th class="">Email ID</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+				      <td>Jamie</td>
+				      <td >5</td>
+				      <td >9731134078</td>
+				      <td >veera.manimuthu@google.com</td>
+				  </tr>
+				  <tr>
+				      <td>Jill</td>
+				      <td >4</td>
+				      <td >9566953836</td>
+				      <td >veera.muthu@aspiresys.com</td>
+				  </tr>
+				  <tr>
+				  	  <td>Ragnar</td>
+				      <td >10</td>
+				      <td >9845621556</td>
+				      <td >manimuthu.pandian@linkedin.com</td>
+				  </tr>
+			  </tbody>		  
+			</table>
+		</article> -->
+
+		
+
+		
+
+		<footer>Copyright &copy; aspiresys.com</footer>
+
+	</div>
+</body>
+
+	
+</html>
